@@ -1,6 +1,6 @@
 # Programming Language Yes Chef - We Cook
 
+- [Overview](design-criteria-and-goals.md)
+- [Reserved Words and Lexical Rules)[reserved-words-lexical-rules.md]
 - [Storage, Scoping, and Types](storage-scoping-types.md)
-- [Learning resources](learning-resources.md)
-- [Documentation references](doc-references__.md)
-- [Past work](past-work.md)
+- [Structure and Semantics for Expressions](structure-semantics-expressions.md)
