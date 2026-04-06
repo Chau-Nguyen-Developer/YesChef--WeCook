@@ -1,4 +1,4 @@
-# Storage, Scoping, and Types
+# Structure and Semantics of Different Kinds of Expressions
 
 ## 1. Structure and Semantics of Arithmetic Expressions
 
