@@ -11,25 +11,30 @@ In our code example, all ingredients are declared statically before the cooking 
 ### Code Example – Static Allocation
 
 ```cpp
-Recipe PastaAlOlio {
-Ingredients {
-pasta        {qty: 16oz, tags: {"grain"}};
-garlic       {qty: 6ct, prep: minced};
-olive_oil    {qty: 3tbsp, tags: {"vegan"}};
-chili_flakes {qty: 1tsp, optional: yes};
-};
+Recipe PastaAlOlio
+{
+        Ingredients
+        {
+                pasta        {qty: 16oz, tags: {"grain"}};
+                garlic       {qty: 6ct, prep: minced};
+                olive_oil    {qty: 3tbsp, tags: {"vegan"}};
+                chili_flakes {qty: 1tsp, optional: yes};
+        };
 
-Substitutions {
-        // Resolved dynamically at runtime if triggered
-        chili_flakes -> red_pepper_powder;
-};
+        Substitutions
+        {
+                // Resolved dynamically at runtime if triggered
+                chili_flakes -> red_pepper_powder;
+        };
 
-Steps {
-@boilPasta {
-tts("Boil ${pasta} until al dente.");
-timer.start(60 * 10);
-}
-};
+        Steps
+        {
+                @boilPasta
+                {
+                        tts("Boil ${pasta} until al dente.");
+                        timer.start(60 * 10);
+                }
+        };
 }
 ```
 
@@ -57,35 +62,41 @@ The language also supports conditional blocks:
 ### Code Example – Semantics of Blocks
 
 ```cpp
-Recipe GrilledCheese {
+Recipe GrilledCheese
+{
 
-    Ingredients {
-bread  {qty: 2ct};
-cheese {qty: 2oz, tags: {"dairy"}};
-butter {qty: 1tbsp};
-};
+    Ingredients
+        {
+                bread  {qty: 2ct};
+                cheese {qty: 2oz, tags: {"dairy"}};
+                butter {qty: 1tbsp};
+        };
 
-Steps {
-@grillSandwich {
-stove.heat(MED);
-tts("Butter the ${bread} and assemble sandwich.");
-wait_for_reply;
-
-if (stove.surface_temp >= 300F) {
-tts("Pan is ready. Place sandwich now.");
-}
-else {
-tts("Wait for pan to heat up.");
-wait_for_reply;
-}
-
- timer.start(60 * 3);
- tts("Flip the sandwich.");
- timer.start(60 * 3);
-
- ...
-}
-};
+        Steps
+        {
+                @grillSandwich
+                {
+                        stove.heat(MED);
+                        tts("Butter the ${bread} and assemble sandwich.");
+                        wait_for_reply;
+                        
+                        if (stove.surface_temp >= 300F)
+                        {
+                                tts("Pan is ready. Place sandwich now.");
+                        }
+                        else
+                        {
+                                tts("Wait for pan to heat up.");
+                                wait_for_reply;
+                        }
+                
+                         timer.start(60 * 3);
+                         tts("Flip the sandwich.");
+                         timer.start(60 * 3);
+                        
+                         ...
+                }
+        };
 }
 ```
 
@@ -100,16 +111,20 @@ Steps are sequential and self-contained. Shared logic should be extracted into s
 ### Code Example – Nested Functions
 
 ```cpp
-Steps {
-@boilWater {
-// define steps here…
-}
-@cookPasta {
-// define steps here…
-}
-@outerStep {
-@innerStep { ... }    // COMPILE ERROR
-}
+Steps
+{
+        @boilWater
+        {
+                // define steps here…
+        }
+        @cookPasta
+        {
+                // define steps here…
+        }
+        @outerStep
+        {
+                @innerStep { ... }    // COMPILE ERROR
+        }
 };
 ```
 
