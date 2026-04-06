@@ -1,4 +1,4 @@
-# WeCook Language Specification
+# Storage, Scope, and Data Types
 
 ## 1. Storage
 
